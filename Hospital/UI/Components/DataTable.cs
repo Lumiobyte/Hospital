@@ -41,6 +41,11 @@ namespace Hospital.UI.Components
             }
         }
 
+        public static void RenderTable<T>(T entity)
+        {
+            RenderTable(new List<T> { entity });
+        }
+
         // Write a row to console and insert column separators where appropriate
         private static void PrintRow(List<string> row)
         {

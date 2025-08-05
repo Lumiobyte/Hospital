@@ -1,4 +1,5 @@
 ﻿using Hospital.Models;
+using Hospital.Services;
 using Hospital.UI;
 using System;
 using System.Collections.Generic;
@@ -21,35 +22,29 @@ namespace Hospital
         // This is very redundant for the hospital app but I'm trying to design things properly
         public static bool UserId(string input)
         {
-            return Numeric(input);
+            bool valid = Numeric(input);
+            if (!valid)
+                Console.WriteLine("Error: Expected numeric input");
+            return valid;
         }
 
         // Validate email address
         public static bool EmailAddress(string input)
         {
             var emailRegex = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            return !string.IsNullOrWhiteSpace(input) && System.Text.RegularExpressions.Regex.IsMatch(input, emailRegex);
+            bool valid = !string.IsNullOrWhiteSpace(input) && System.Text.RegularExpressions.Regex.IsMatch(input, emailRegex);
+            if (!valid)
+                Console.WriteLine("Error: Not a valid email address");
+            return valid;
         }
 
         // Validate phone number
         public static bool PhoneNumber(string input)
         {
-            return Numeric(input) && (input.Length >= 9 && input.Length <= 10);
-        }
-
-        public static bool LoginProcessor(string userId, string password)
-        {
-            IUserAccount? user = CheckPassword();
-
-            if (user == null)
-                Console.WriteLine("Invalid login credentials");
-                return false;
-
-            IMenu newMenu = MenuFactory(user);
-            MenuState.Instance.Push(newMenu);
-
-            Console.WriteLine("Valid Credentials");
-            return true;
+            bool valid = Numeric(input) && (input.Length >= 9 && input.Length <= 10);
+            if (!valid)
+                Console.WriteLine("Error: Not a valid phone number");
+            return valid;
         }
 
     }

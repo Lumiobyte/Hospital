@@ -21,11 +21,38 @@ namespace Hospital.Services
             _adminRepository = adminRepository;
         }
 
-        public IUserAccount? LoginUser(string email, string password)
+        public IUserAccount? ValidateCredentials(int userId, string password)
         {
-            // Attempt to login
-            // Success -> return IUserAccount instance
-            // Fail -> return null
+            if(userId < 0)
+            {
+                SeedDatabase();
+                Console.WriteLine("Database Seeded Succesfully :)");
+                return null;
+            }
+
+            var foundUser = TryGetAccountById(userId);
+
+            if (foundUser == null || foundUser.Password != password)
+                return null;
+            else 
+                return foundUser;
+        }
+
+        IUserAccount? TryGetAccountById(int userId)
+        {
+            var doctor = _doctorRepository.GetById(userId);
+            if (doctor != null) return doctor;
+
+            var patient = _patientRepository.GetById(userId);
+            if (patient != null) return patient;
+
+            var admin = _adminRepository.GetById(userId);
+            return admin;
+        }
+
+        private void SeedDatabase()
+        {
+            // Seed rows
         }
     }
 }

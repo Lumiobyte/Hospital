@@ -1,4 +1,5 @@
 ﻿using Hospital.Models;
+using Hospital.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,12 @@ namespace Hospital.UI.Components
     public static class InputField
     {
 
-        public static bool PromptLogin(Func<string, string, bool> loginProcessor)
+        public static IUserAccount? PromptLogin(HospitalService hospitalService)
         {
-            var userId = Prompt("ID: ", validator: Validators.UserId);
-            var password = Prompt("Password: ", masked: true);
+            var userId = int.Parse(Prompt("ID", validator: Validators.UserId));
+            var password = Prompt("Password", masked: true);
 
-            return loginProcessor(userId, password); // Return success/failure boolean. The loginProcessor will update the state singleton to the new screen if the login was successful.
+            return hospitalService.ValidateCredentials(userId, password);
         }
 
         public static string Prompt(string label, Predicate<string>? validator = null, bool masked = false) // it is possible to do Func<string, IUserAccount> testset, er.g. multiparam/outputs.
@@ -25,7 +26,8 @@ namespace Hospital.UI.Components
             string input = masked ? ReadMasked() : (Console.ReadLine() ?? "");
 
             if (validator != null)
-                validator(input);
+                if (!validator(input))
+                    Prompt(label, validator, masked); // Recurse until a valid input is provided.
 
             return input;
             

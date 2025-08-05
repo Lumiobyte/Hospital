@@ -12,18 +12,18 @@ namespace Hospital.UI
     {
 
         MenuFactory _menuFactory;
-        ServiceFactory _serviceFactory;
+        HospitalService _hospitalService;
 
-        public LoginMenu(MenuFactory menuFactory, ServiceFactory serviceFactory)
+        public LoginMenu(MenuFactory menuFactory, HospitalService hospitalService)
         {
             _menuFactory = menuFactory;
-            _serviceFactory = serviceFactory;
+            _hospitalService = hospitalService;
         }
 
         public void Load()
         {
             Console.Clear();
-            // Display intro text
+            TitleBox.DrawTitleBox("Login");
         }
 
         public void Show()
@@ -34,10 +34,13 @@ namespace Hospital.UI
         // Prompt the user for a login. Recurse and prompt again if the attempt was unsuccessful.
         public void TakeAccountDetails()
         {
-            var success = InputField.PromptLogin(_menuFactory, _serviceFactory);
-            if(!success)
+            var user = InputField.PromptLogin(_hospitalService);
+            if (user != null)
+                InputDevice.DelayUntilPress(() => { MenuState.Instance.Push(_menuFactory.CreateUserMenu(user)); });
+            else
                 TakeAccountDetails();
         }
 
     }
 }
+

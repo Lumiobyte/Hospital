@@ -9,13 +9,7 @@ namespace Hospital.Models
     public class Admin : IUserAccount
     {
 
-        public Admin(string password)
-        {
-            Password = password;
-        }
-
         public int Id { get; set; }
-
         public string Password { get; set; }
     }
 }

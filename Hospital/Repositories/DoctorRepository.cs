@@ -15,15 +15,10 @@ namespace Hospital.Repositories
         {
         }
 
-        public IEnumerable<Patient> GetPatients()
-        {
-            return  _dbSet.Include(d => d.Patients).FirstOrDefault(d => d.Id == );
-        }
-
-        public IEnumerable<Doctor> GetBySpecialization(string specialization)
-        {
-            return _dbSet.Where(d => d.Specialization == specialization).ToList();
-        }
+        //public IEnumerable<Patient> GetPatients()
+        //{
+        //    return  _dbSet.Include(d => d.Patients).FirstOrDefault(d => d.Id == );
+        //}
 
     }
 }
