@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.Models
 {
-    internal class DoctorModel
+    public interface IUserAccount
     {
     }
 }
