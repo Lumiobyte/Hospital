@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,13 @@ namespace Hospital.Models
         public StreetAddress Address { get; set; }
 
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+
+        public int PrimaryDoctorId { get; set; }
+        [ForeignKey(nameof(PrimaryDoctorId))]
         public Doctor PrimaryDoctor { get; set; }
+
+        [NotMapped]
+        public string FullName => Name + " " + Surname;
 
     }
 }

@@ -10,13 +10,6 @@ namespace Hospital.Models
     public class StreetAddress
     {
 
-        public StreetAddress(int unitNo, string street, string city, string state)
-        {
-            UnitNo = unitNo;
-            Street = street;
-            City = city;
-            State = state;
-        }
         public int Id { get; set; }
         public int UnitNo { get; set; }
         public string Street { get; set; }

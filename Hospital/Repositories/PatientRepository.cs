@@ -12,7 +12,27 @@ namespace Hospital.Repositories
 
         public PatientRepository(HospitalDbContext context) : base(context) { }
 
-        // Add extra methods
+        public void AddAppointment(Patient patient, string description)
+        {
+
+            // This will ensure that EF tracks our changes properly and creates correct relationships for this new appointment
+            // TODO: Add/remove if necessary
+            //_context.Attach(patient);
+            //_context.Attach(patient.PrimaryDoctor);
+
+            var apt = new Appointment() { AptDoctor = patient.PrimaryDoctor, AptPatient = patient, Description = description};
+
+            patient.Appointments.Add(apt);
+            patient.PrimaryDoctor.Appointments.Add(apt);
+
+            _context.SaveChanges();
+        }
+
+        public void SetPatientDoctor(Patient patient, Doctor doctor)
+        {
+            patient.PrimaryDoctor = doctor;
+            _context.SaveChanges();
+        }
 
     }
 }

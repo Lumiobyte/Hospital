@@ -1,5 +1,6 @@
 ﻿using Hospital.Models;
 using Hospital.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,12 @@ namespace Hospital.Services
         private void SeedDatabase()
         {
             // Seed rows
+
+            // This sets different ID increment starting points for different rows -> prevent overlap
+            _adminRepository.ExecuteSqlRawHelper(@"
+            INSERT OR REPLACE INTO sqlite_sequence (name, seq) VALUES ('Doctors', 999);
+            INSERT OR REPLACE INTO sqlite_sequence (name, seq) VALUES ('Patients', 1999);
+            ");
         }
     }
 }

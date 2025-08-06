@@ -37,26 +37,27 @@ namespace Hospital.UI
 
             switch (option)
             {
-                case 0:
+                case 1:
                     MenuState.Instance.Push(new ViewMyDetailsMenu(_user));
                     break;
-                case 1:
-
-                    break;
                 case 2:
+                    // TODO: Implement "list my doctor details"
                     break;
                 case 3:
+                    _menuFactory.CreateMenu<ListAppointmentsForPatientMenu>(_user);
                     break;
                 case 4:
-                    _menuFactory.CreateMenu<CreateAppointmentMenu>();
+                    _menuFactory.CreateMenu<CreateAppointmentMenu>(_user);
                     break;
                 case 5:
                     MenuState.Instance.Pop();
                     break;
                 case 6:
+                    Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine($"Error: No option exists for {option}");
+                    InputDevice.DelayUntilPress(() => { VisualDevice.ClearPreviousLines(1); });
                     break;
             }
         }

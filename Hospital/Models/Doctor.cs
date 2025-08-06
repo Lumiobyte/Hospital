@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Hospital.Models
 {
@@ -17,9 +18,15 @@ namespace Hospital.Models
         public string Surname { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+
+        public int StreetAddressId { get; set; }
+        [ForeignKey(nameof(StreetAddressId))]
         public StreetAddress Address { get; set; }
 
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
         public ICollection<Patient> Patients { get; set; } = new List<Patient>();
+
+        [NotMapped]
+        public string FullName => Name + " " + Surname;
     }
 }

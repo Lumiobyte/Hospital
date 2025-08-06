@@ -1,4 +1,5 @@
 ﻿using Hospital.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace Hospital.Repositories
         public AdminRepository(HospitalDbContext context) : base(context) { }
 
         // Add extra methods
+
+        public void ExecuteSqlRawHelper(string sqlStatement)
+        {
+            _context.Database.ExecuteSqlRaw(sqlStatement);
+        }
 
     }
 }

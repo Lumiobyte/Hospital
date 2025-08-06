@@ -1,4 +1,5 @@
-﻿using Hospital.Repositories;
+﻿using Hospital.Models;
+using Hospital.Repositories;
 using Hospital.UI.Components;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,13 @@ namespace Hospital.UI
 
         DoctorRepository _doctorRepository;
         PatientRepository _patientRepository;
+        Patient patient;
 
-        public CreateAppointmentMenu(DoctorRepository doctorRepository, PatientRepository patientRepository)
+        public CreateAppointmentMenu(DoctorRepository doctorRepository, PatientRepository patientRepository, Patient patient)
         {
             _doctorRepository = doctorRepository;
             _patientRepository = patientRepository;
+            this.patient = patient;
         }
 
         public void Load()
@@ -30,7 +33,34 @@ namespace Hospital.UI
         {
             // If patient has no linked doctor - link one now.
 
-            // Take appointment information and save.
+            Doctor patientDoctor;
+
+            if(patient.PrimaryDoctor == null)
+            {
+                Console.WriteLine("You are not registered with any doctor! Please choose a doctor: ");
+                DataTable.RenderTable(_doctorRepository.GetAll(), true);
+                var choice = int.Parse(InputField.Prompt("Enter the ID of the doctor you choose: ", Validators.UserId));
+                var chosenDoctor = _doctorRepository.GetById(choice);
+                while(chosenDoctor == null)
+                {
+                    VisualDevice.ClearPreviousLines(1);
+                    choice = int.Parse(InputField.Prompt("Enter a valid doctor ID: ", Validators.UserId));
+                    chosenDoctor = _doctorRepository.GetById(choice);
+                }
+
+                patientDoctor = chosenDoctor;
+                _patientRepository.SetPatientDoctor(patient, chosenDoctor);
+            }
+            else
+            {
+                patientDoctor = patient.PrimaryDoctor;
+            }
+
+            Console.WriteLine($"Booking new appointment with {patientDoctor.FullName}");
+
+            var description = InputField.Prompt("Appointment description");
+
+            _patientRepository.AddAppointment(patient, description);
         }
 
     }
