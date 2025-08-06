@@ -29,7 +29,7 @@ namespace Hospital.UI
         {
             Console.WriteLine($"{user.Name}'s Details");
             Console.WriteLine();
-            Console.WriteLine($"Patient ID: {user.Id}");
+            Console.WriteLine($"{user.GetType().Name} ID: {user.Id}");
             Console.WriteLine($"Full Name: {user.FullName}");
             Console.WriteLine($"Address: {user.Address}");
             Console.WriteLine($"Email: {user.Email}");

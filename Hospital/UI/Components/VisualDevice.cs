@@ -22,7 +22,9 @@ namespace Hospital.UI.Components
 
                 Console.SetCursorPosition(0, cursorLine - 1);
                 Console.Write(new string(' ', Console.WindowWidth));
+                Console.SetCursorPosition(0, cursorLine - 1); // Because writing WindowWidth sets us down to the next line
             }
+
         }
 
     }

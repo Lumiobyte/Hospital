@@ -17,6 +17,7 @@ namespace Hospital
                 .AddScoped<DoctorRepository>()
                 .AddScoped<PatientRepository>()
                 .AddScoped<AdminRepository>()
+                .AddScoped<AppointmentRepository>()
                 .AddTransient<DoctorMenu>()
                 .AddTransient<PatientMenu>()
                 .AddTransient<AdminMenu>()

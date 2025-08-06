@@ -11,19 +11,25 @@ namespace Hospital.Models
     public class Doctor : IUserAccount
     {
 
+        [Tabulate]
         public int Id { get; set; } 
         public string Password { get; set; }
 
+        [NotMapped]
+        [Tabulate]
+        public string FullName => Name + " " + Surname;
         public string Name { get; set; }
         public string Surname { get; set; }
+
+        [Tabulate]
         public string Email { get; set; }
+
+        [Tabulate]
         public string PhoneNumber { get; set; }
+
+        [Tabulate]
         public string Address { get; set; }
 
-        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
-        public ICollection<Patient> Patients { get; set; } = new List<Patient>();
-
-        [NotMapped]
-        public string FullName => Name + " " + Surname;
+        //public ICollection<Patient> Patients { get; set; } = new List<Patient>();
     }
 }

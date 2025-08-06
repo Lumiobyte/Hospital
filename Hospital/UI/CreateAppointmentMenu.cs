@@ -14,12 +14,14 @@ namespace Hospital.UI
 
         DoctorRepository _doctorRepository;
         PatientRepository _patientRepository;
+        AppointmentRepository _appointmentRepository;
         Patient patient;
 
-        public CreateAppointmentMenu(DoctorRepository doctorRepository, PatientRepository patientRepository, Patient patient)
+        public CreateAppointmentMenu(AppointmentRepository appointmentRepository, DoctorRepository doctorRepository, PatientRepository patientRepository, Patient patient)
         {
             _doctorRepository = doctorRepository;
             _patientRepository = patientRepository;
+            _appointmentRepository = appointmentRepository;
             this.patient = patient;
         }
 
@@ -39,12 +41,12 @@ namespace Hospital.UI
             {
                 Console.WriteLine("You are not registered with any doctor! Please choose a doctor: ");
                 DataTable.RenderTable(_doctorRepository.GetAll(), true);
-                var choice = int.Parse(InputField.Prompt("Enter the ID of the doctor you choose: ", Validators.UserId));
+                var choice = int.Parse(InputField.Prompt("Enter the ID of the doctor you choose", Validators.UserId));
                 var chosenDoctor = _doctorRepository.GetById(choice);
                 while(chosenDoctor == null)
                 {
                     VisualDevice.ClearPreviousLines(1);
-                    choice = int.Parse(InputField.Prompt("Enter a valid doctor ID: ", Validators.UserId));
+                    choice = int.Parse(InputField.Prompt("Enter a valid doctor ID", Validators.UserId));
                     chosenDoctor = _doctorRepository.GetById(choice);
                 }
 
@@ -60,7 +62,10 @@ namespace Hospital.UI
 
             var description = InputField.Prompt("Appointment description");
 
-            _patientRepository.AddAppointment(patient, description);
+            _appointmentRepository.Add(new Appointment() { AptDoctor = patient.PrimaryDoctor, AptPatient = patient, Description = description });
+
+            Console.WriteLine("Booked your appointment succesfully!");
+            InputDevice.DelayExitUntilPress();
         }
 
     }

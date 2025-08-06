@@ -15,10 +15,5 @@ namespace Hospital.Repositories
         {
         }
 
-        //public IEnumerable<Patient> GetPatients()
-        //{
-        //    return  _dbSet.Include(d => d.Patients).FirstOrDefault(d => d.Id == );
-        //}
-
     }
 }

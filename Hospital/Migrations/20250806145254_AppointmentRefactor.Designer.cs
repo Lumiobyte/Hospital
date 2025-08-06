@@ -2,6 +2,7 @@
 using Hospital;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hospital.Migrations
 {
     [DbContext(typeof(HospitalDbContext))]
-    partial class HospitalDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250806145254_AppointmentRefactor")]
+    partial class AppointmentRefactor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.7");
@@ -29,31 +32,6 @@ namespace Hospital.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Admins");
-                });
-
-            modelBuilder.Entity("Hospital.Models.Appointment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AptDoctorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("AptPatientId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AptDoctorId");
-
-                    b.HasIndex("AptPatientId");
-
-                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("Hospital.Models.Doctor", b =>
@@ -131,34 +109,20 @@ namespace Hospital.Migrations
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("Hospital.Models.Appointment", b =>
-                {
-                    b.HasOne("Hospital.Models.Doctor", "AptDoctor")
-                        .WithMany()
-                        .HasForeignKey("AptDoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Hospital.Models.Patient", "AptPatient")
-                        .WithMany()
-                        .HasForeignKey("AptPatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AptDoctor");
-
-                    b.Navigation("AptPatient");
-                });
-
             modelBuilder.Entity("Hospital.Models.Patient", b =>
                 {
                     b.HasOne("Hospital.Models.Doctor", "PrimaryDoctor")
-                        .WithMany()
+                        .WithMany("Patients")
                         .HasForeignKey("PrimaryDoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("PrimaryDoctor");
+                });
+
+            modelBuilder.Entity("Hospital.Models.Doctor", b =>
+                {
+                    b.Navigation("Patients");
                 });
 #pragma warning restore 612, 618
         }

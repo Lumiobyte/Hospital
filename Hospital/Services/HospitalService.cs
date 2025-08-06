@@ -54,8 +54,10 @@ namespace Hospital.Services
         private void SeedDatabase()
         {
             // Seed rows
-            _doctorRepository.Add(new Doctor() { Id = 123, Name = "Doctor", Surname = "DotNet", Address = "1 Doctor St, Shalvey, NSW", Email = "doctor@gmail.com", Password = "doctor", PhoneNumber = "0400123456" });
-            _patientRepository.Add(new Patient() { Id = 234, PrimaryDoctorId = 123, Name = "Patient", Surname = "1", Address = "1 Patient St, Nerang, QLD", Email = "patient@gmail.com", Password = "patient", PhoneNumber = "0400123457" });
+            var seedDoctor = new Doctor() { Id = 123, Name = "Doctor", Surname = "DotNet", Address = "1 Doctor St, Shalvey, NSW", Email = "doctor@gmail.com", Password = "doctor", PhoneNumber = "0400123456" };
+            _doctorRepository.Add(seedDoctor);
+            var seedPatient = new Patient() { Id = 234, PrimaryDoctor = seedDoctor, Name = "Patient", Surname = "1", Address = "1 Patient St, Nerang, QLD", Email = "patient@gmail.com", Password = "patient", PhoneNumber = "0400123457" };
+            _patientRepository.Add(seedPatient);
             _adminRepository.Add(new Admin() { Id = 345, Password = "admin" });
 
             // This sets different ID increment starting points for different rows -> prevent overlap

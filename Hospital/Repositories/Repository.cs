@@ -19,7 +19,7 @@ namespace Hospital.Repositories
             _dbSet = _context.Set<TEntity>();
         }
 
-        public TEntity? GetById(int id)
+        public virtual TEntity? GetById(int id)
         {
             return _dbSet.Find(id);
         }

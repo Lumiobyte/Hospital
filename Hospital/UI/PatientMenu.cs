@@ -28,7 +28,8 @@ namespace Hospital.UI
         {
             Console.Clear();
             TitleBox.Draw("Patient Menu");
-            Console.WriteLine("Options::sdfsdfsdf");
+            Console.WriteLine($"Welcome to DotNet Hospital Management System {_user.FullName}\n\n");
+            Console.WriteLine("Please choose an option:\n1. List patient details\n2. List my doctor details\n3. List all appointments\n4. Book appointment\n5. Exit to login\n6. Exit System");
         }
 
         // Render this menu

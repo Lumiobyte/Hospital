@@ -38,7 +38,7 @@ namespace Hospital.UI
                 return;
             }
 
-            DataTable.RenderTable(doctor);
+            DataTable.RenderTable(new List<Doctor> { doctor });
 
             InputDevice.DelayUntilPress(() => { MenuState.Instance.Pop(); });
         }

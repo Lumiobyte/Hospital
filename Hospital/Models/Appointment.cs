@@ -12,14 +12,18 @@ namespace Hospital.Models
 
         public int Id { get; set; }
 
-        public int AptDoctorId { get; set; }
-        [ForeignKey(nameof(AptDoctorId))]
         public Doctor AptDoctor { get; set; }
-
-        public int AptPatientId { get; set; }
-        [ForeignKey(nameof(AptPatientId))]
         public Patient AptPatient { get; set; }
 
+        [NotMapped]
+        [Tabulate]
+        public string DoctorName => AptDoctor.FullName;
+
+        [NotMapped]
+        [Tabulate]
+        public string PatientName => AptPatient.FullName;
+
+        [Tabulate]
         public string Description { get; set; }
 
     }

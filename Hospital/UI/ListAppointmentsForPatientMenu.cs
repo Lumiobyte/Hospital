@@ -12,12 +12,12 @@ namespace Hospital.UI
     public class ListAppointmentsForPatientMenu : IMenu
     {
 
-        PatientRepository _repository;
+        AppointmentRepository _appointmentRepository;
         Patient patient;
 
-        public ListAppointmentsForPatientMenu(PatientRepository patientRepository, Patient patient)
+        public ListAppointmentsForPatientMenu(AppointmentRepository appointmentRepository, Patient patient)
         {
-            _repository = patientRepository;
+            _appointmentRepository = appointmentRepository;
             this.patient = patient;
         }
 
@@ -30,6 +30,8 @@ namespace Hospital.UI
         public void Show()
         {
             Console.WriteLine($"Appointments for {patient.FullName}");
+            DataTable.RenderTable(_appointmentRepository.GetAppointmentsForPatient(patient));
+            InputDevice.DelayExitUntilPress();
         }
 
     }

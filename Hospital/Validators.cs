@@ -15,17 +15,17 @@ namespace Hospital
         // Validate that input contains only digits
         public static bool Numeric(string input)
         {
-            return !string.IsNullOrWhiteSpace(input) && input.All(char.IsDigit);
+            bool valid = !string.IsNullOrWhiteSpace(input) && input.All(char.IsDigit);
+            if (!valid)
+                Console.WriteLine("Error: Expected numeric input");
+            return valid;
         }
 
         // In case the spec of a UserID changes in the future, we won't need to replace usages of the Numeric validator with a new one, instead simply changing the behaviour of this validator :)
         // This is very redundant for the hospital app but I'm trying to design things properly
         public static bool UserId(string input)
         {
-            bool valid = Numeric(input);
-            if (!valid)
-                Console.WriteLine("Error: Expected numeric input");
-            return valid;
+            return Numeric(input);
         }
 
         // Validate email address
