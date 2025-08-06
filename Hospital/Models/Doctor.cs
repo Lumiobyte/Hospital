@@ -18,10 +18,7 @@ namespace Hospital.Models
         public string Surname { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-
-        public int StreetAddressId { get; set; }
-        [ForeignKey(nameof(StreetAddressId))]
-        public StreetAddress Address { get; set; }
+        public string Address { get; set; }
 
         public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
         public ICollection<Patient> Patients { get; set; } = new List<Patient>();

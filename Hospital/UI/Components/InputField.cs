@@ -27,7 +27,7 @@ namespace Hospital.UI.Components
 
             if (validator != null)
                 if (!validator(input))
-                    Prompt(label, validator, masked); // Recurse until a valid input is provided.
+                    return Prompt(label, validator, masked); // Recurse until a valid input is provided.
 
             return input;
             

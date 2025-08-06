@@ -36,9 +36,16 @@ namespace Hospital.UI
         {
             var user = InputField.PromptLogin(_hospitalService);
             if (user != null)
+            {
+                Console.WriteLine("Valid Credentials");
                 InputDevice.DelayUntilPress(() => { MenuState.Instance.Push(_menuFactory.CreateUserMenu(user)); });
+            }
             else
+            {
+                Console.WriteLine("Invalid Credentials");
                 TakeAccountDetails();
+            }
+                
         }
 
     }

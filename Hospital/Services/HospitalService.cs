@@ -24,7 +24,7 @@ namespace Hospital.Services
 
         public IUser? ValidateCredentials(int userId, string password)
         {
-            if(userId < 0)
+            if(userId == 867)
             {
                 SeedDatabase();
                 Console.WriteLine("Database Seeded Succesfully :)");
@@ -33,7 +33,7 @@ namespace Hospital.Services
 
             var foundUser = TryGetAccountById(userId);
 
-            if (foundUser == null || foundUser.Password != password)
+            if (foundUser == null || !foundUser.Password.Equals(password))
                 return null;
             else 
                 return foundUser;
@@ -54,6 +54,9 @@ namespace Hospital.Services
         private void SeedDatabase()
         {
             // Seed rows
+            _doctorRepository.Add(new Doctor() { Id = 123, Name = "Doctor", Surname = "DotNet", Address = "1 Doctor St, Shalvey, NSW", Email = "doctor@gmail.com", Password = "doctor", PhoneNumber = "0400123456" });
+            _patientRepository.Add(new Patient() { Id = 234, PrimaryDoctorId = 123, Name = "Patient", Surname = "1", Address = "1 Patient St, Nerang, QLD", Email = "patient@gmail.com", Password = "patient", PhoneNumber = "0400123457" });
+            _adminRepository.Add(new Admin() { Id = 345, Password = "admin" });
 
             // This sets different ID increment starting points for different rows -> prevent overlap
             _adminRepository.ExecuteSqlRawHelper(@"

@@ -14,7 +14,7 @@ namespace Hospital.UI.Components
         {
             int boxWidth = 44;
             Console.WriteLine("┌" + new string('─', boxWidth - 2) + "┐");
-            Console.WriteLine("|" + "   DotNet Hospital Management System   " + "|");
+            Console.WriteLine("|" + "     DotNet Hospital Management System    " + "|");
             Console.WriteLine("|" + new string('-', boxWidth - 2), "|");
             Console.WriteLine("|" + CenterText(menuTitle, boxWidth - 2) + "|");
             Console.WriteLine("└" + new string('─', boxWidth - 2) + "┘");

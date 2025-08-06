@@ -28,6 +28,7 @@ namespace Hospital.UI
         {
             Console.Clear();
             TitleBox.Draw("Patient Menu");
+            Console.WriteLine("Options::sdfsdfsdf");
         }
 
         // Render this menu
@@ -57,7 +58,7 @@ namespace Hospital.UI
                     break;
                 default:
                     Console.WriteLine($"Error: No option exists for {option}");
-                    InputDevice.DelayUntilPress(() => { VisualDevice.ClearPreviousLines(1); });
+                    InputDevice.DelayUntilPress(() => { VisualDevice.ClearPreviousLines(2); });
                     break;
             }
         }
