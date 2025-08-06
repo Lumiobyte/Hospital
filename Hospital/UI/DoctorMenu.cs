@@ -53,8 +53,7 @@ namespace Hospital.UI
                     _menuFactory.CreateMenu<ViewPatientDetailMenu>();
                     break;
                 case 5:
-                    // TODO: BROKEN
-                    _menuFactory.CreateMenu<ListAppointmentsForPatientMenu>(_user);
+                    _menuFactory.CreateMenu<DoctorViewPatientAppointmentListWrapperMenu>();
                     break;
                 case 6:
                     MenuState.Instance.Pop();
