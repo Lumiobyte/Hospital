@@ -19,7 +19,7 @@ namespace Hospital.UI
         }
 
         // Create a new instance of a user menu e.g. the root menu for Doctors, Patients, or Admins
-        public IMenu CreateUserMenu(IUserAccount user)
+        public IMenu CreateUserMenu(IUser user)
         {
             return user switch
             {
@@ -30,9 +30,15 @@ namespace Hospital.UI
         }
 
         // Create a new instance of a generic menu that requires database access e.g. the "create new user" menu, the "schedule new appointment" menu..
-        public IMenu CreateMenu<T>() where T : IMenu, new() // could allow this to take some args in some structure e.g. a list or a dict, whihc are then passed to the menu obect initialisation.
+        public IMenu CreateMenu<T>() where T : IMenu // could allow this to take some args in some structure e.g. a list or a dict, whihc are then passed to the menu obect initialisation.
         {
             return ActivatorUtilities.CreateInstance<T>(_serviceProvider);
+        }
+
+        // New instance of a generic menu, but this override allows us to pass parameters.
+        public IMenu CreateMenu<T>(params object[] args) where T : IMenu
+        {
+            return (IMenu) ActivatorUtilities.CreateInstance(_serviceProvider, typeof(T), args);
         }
 
         // Generic menus that don't require DB can be created anywhere by simply instantiating the class.

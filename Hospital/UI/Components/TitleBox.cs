@@ -9,14 +9,21 @@ namespace Hospital.UI.Components
     public static class TitleBox
     {
 
-        public static void DrawTitleBox(string menuTitle)
+        // Draw the title box, calculate padding to center the menu title
+        public static void Draw(string menuTitle)
         {
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("DotNet Hospital Management System");
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine(menuTitle);
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine("");
+            int boxWidth = 44;
+            Console.WriteLine("┌" + new string('─', boxWidth - 2) + "┐");
+            Console.WriteLine("|" + "   DotNet Hospital Management System   " + "|");
+            Console.WriteLine("|" + new string('-', boxWidth - 2), "|");
+            Console.WriteLine("|" + CenterText(menuTitle, boxWidth - 2) + "|");
+            Console.WriteLine("└" + new string('─', boxWidth - 2) + "┘");
+        }
+
+        public static string CenterText(string text, int width)
+        {
+            int leftPadding = (width - text.Length) / 2;
+            return new string(' ', leftPadding) + text + new string(' ', width - text.Length - leftPadding);
         }
 
     }

@@ -20,5 +20,10 @@ namespace Hospital.UI.Components
             onContinue();
         }
 
+        public static void DelayExitUntilPress()
+        {
+            DelayUntilPress(() => { MenuState.Instance.Pop(); });
+        }
+
     }
 }

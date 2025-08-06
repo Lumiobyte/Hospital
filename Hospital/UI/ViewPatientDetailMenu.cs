@@ -22,7 +22,7 @@ namespace Hospital.UI
         public void Load()
         {
             Console.Clear();
-            TitleBox.DrawTitleBox("View Patient Details");
+            TitleBox.Draw("View Patient Details");
         }
 
         public void Show()

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hospital.Models
 {
-    public class Admin : IUser
+    public interface IUser
     {
-
         public int Id { get; set; }
         public string Password { get; set; }
     }

@@ -21,7 +21,7 @@ namespace Hospital.Services
             _adminRepository = adminRepository;
         }
 
-        public IUserAccount? ValidateCredentials(int userId, string password)
+        public IUser? ValidateCredentials(int userId, string password)
         {
             if(userId < 0)
             {
@@ -38,7 +38,7 @@ namespace Hospital.Services
                 return foundUser;
         }
 
-        IUserAccount? TryGetAccountById(int userId)
+        IUser? TryGetAccountById(int userId)
         {
             var doctor = _doctorRepository.GetById(userId);
             if (doctor != null) return doctor;

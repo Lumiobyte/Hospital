@@ -23,7 +23,7 @@ namespace Hospital.UI
         public void Load()
         {
             Console.Clear();
-            TitleBox.DrawTitleBox("Login");
+            TitleBox.Draw("Login");
         }
 
         public void Show()

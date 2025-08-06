@@ -21,7 +21,7 @@ namespace Hospital.UI
         public void Load()
         {
             Console.Clear();
-            TitleBox.DrawTitleBox("All Patients");
+            TitleBox.Draw("All Patients");
         }
 
         public void Show()

@@ -11,7 +11,7 @@ namespace Hospital.UI.Components
     public static class InputField
     {
 
-        public static IUserAccount? PromptLogin(HospitalService hospitalService)
+        public static IUser? PromptLogin(HospitalService hospitalService)
         {
             var userId = int.Parse(Prompt("ID", validator: Validators.UserId));
             var password = Prompt("Password", masked: true);
