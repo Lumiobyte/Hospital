@@ -47,5 +47,13 @@ namespace Hospital
             return valid;
         }
 
+        public static bool NotNullString(string input)
+        {
+            bool valid = !string.IsNullOrWhiteSpace(input);
+            if (!valid)
+                Console.WriteLine("Error: Input cannot be empty");
+            return valid;
+        }
+
     }
 }
