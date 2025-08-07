@@ -66,10 +66,19 @@ namespace Hospital.UI
 
             _appointmentRepository.Add(new Appointment() { AptDoctor = patientDoctor, AptPatient = patient, Description = description });
 
-            Emails.SendEmail(patientDoctor.Email, "New Appointment Booking", $"Dear {patientDoctor.FullName},\n{patient.FullName} has scheduled a new appointment with you.\n\nAppointment Description:{description}");
-            Emails.SendEmail(patient.Email, $"Doctor's Appointment with ${patientDoctor.FullName}", $"Dear {patient.FullName},\nYou have succesfully scheduled an appointment with Dr {patientDoctor.FullName}.\n\nAppointment Description:{description}");
+            Console.WriteLine("Booked your appointment succesfully!");
 
-            Console.WriteLine("Booked your appointment succesfully! You and your doctor have been notified by email.");
+            try
+            {
+                Emails.SendEmail(patientDoctor.Email, "New Appointment Booking", $"Dear {patientDoctor.FullName},\n{patient.FullName} has scheduled a new appointment with you.\n\nAppointment Description:{description}");
+                Emails.SendEmail(patient.Email, $"Doctor's Appointment with ${patientDoctor.FullName}", $"Dear {patient.FullName},\nYou have succesfully scheduled an appointment with Dr {patientDoctor.FullName}.\n\nAppointment Description:{description}");
+                Console.WriteLine("You and your doctor have been notified by email.");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Failed to send email notifications :(\n{ex.Message}");
+            }
+
             InputDevice.DelayExitUntilPress();
         }
 

@@ -20,7 +20,7 @@ namespace Hospital
             _menuStack = new Stack<IMenu>();
         }
 
-        // Method comments are available on the IMenu interface
+        // Run whenever a menu reaches the top of the stack, either by creation, or by the menu higher than it being exited. This allows the menu to perform any setup it may require.
         public void Load()
         {
             if (_menuStack.Count > 0)
@@ -29,6 +29,7 @@ namespace Hospital
                 throw new InvalidOperationException("There is no menu on the menu stack to load");
         }
 
+        // Call the menu's show method. The show method contains the menu's mainloop logic that will be run repeatedly until the menu is exited (aka popped off the stack).
         public void Show()
         {
             if(_menuStack.Count > 0)

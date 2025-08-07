@@ -47,6 +47,7 @@ namespace Hospital
             return valid;
         }
 
+        // Validate that the string has any characters, not including spaces.
         public static bool NotNullString(string input)
         {
             bool valid = !string.IsNullOrWhiteSpace(input);

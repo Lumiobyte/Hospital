@@ -9,7 +9,7 @@ namespace Hospital
     {
 
 
-
+        // Setup services, create the login menu, and start the mainloop
         static void Main(string[] args)
         {
             ServiceProvider serviceProvider = new ServiceCollection()

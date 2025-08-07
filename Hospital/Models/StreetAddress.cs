@@ -16,6 +16,7 @@ namespace Hospital.Models
         public string City { get; set; }
         public string State { get; set; }
 
+        // Override ToString so we can format the address as desired
         public override string ToString()
         {
             return $"{UnitNo} {Street}, {City}, {State}";

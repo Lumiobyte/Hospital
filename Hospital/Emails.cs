@@ -11,14 +11,14 @@ namespace Hospital
     public static class Emails
     {
 
-
+        // Send an email using SMTP
         public static void SendEmail(string toEmail, string subject, string body)
         {
             var fromEmail = "hospitaldotnet2@gmail.com";
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential(fromEmail, "klhb kxjj hpgf fqom"),
+                Credentials = new NetworkCredential(fromEmail, "nlxj tuop gqzy ohsb"),
                 EnableSsl = true
             };
 

@@ -11,6 +11,7 @@ namespace Hospital.UI.Components
     public static class InputField
     {
 
+        // Helper to prompt for an account login and validate the provided credentials
         public static IUser? PromptLogin(HospitalService hospitalService)
         {
             var userId = int.Parse(Prompt("ID", validator: Validators.UserId));
@@ -19,7 +20,8 @@ namespace Hospital.UI.Components
             return hospitalService.ValidateCredentials(userId, password);
         }
 
-        public static string Prompt(string label, Predicate<string>? validator = null, bool masked = false) // it is possible to do Func<string, IUserAccount> testset, er.g. multiparam/outputs.
+        // Prompt for an input. Optionally provide a Validator that will be run on the input and recurse if the input does not pass validation.
+        public static string Prompt(string label, Predicate<string>? validator = null, bool masked = false) 
         {
             Console.Write($"{label}: ");
 
@@ -33,6 +35,7 @@ namespace Hospital.UI.Components
             
         }
 
+        // Prompt for an input as above, but also execute an action on succesful submit
         public static string Prompt(string label, Action<string> onSubmit, Predicate<string>? validator = null, bool masked = false)
         {
             var input = Prompt(label, validator, masked);
@@ -42,6 +45,7 @@ namespace Hospital.UI.Components
             return input;
         }
 
+        // Read input and mask what was typed e.g. password input: "********"
         private static string ReadMasked()
         {
 

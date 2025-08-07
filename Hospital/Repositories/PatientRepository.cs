@@ -14,12 +14,14 @@ namespace Hospital.Repositories
         public PatientRepository(HospitalDbContext context) : base(context) {
         }
 
+        // Set the primary doctor FK for a patient
         public void SetPatientDoctor(Patient patient, Doctor doctor)
         {
             patient.PrimaryDoctor = doctor;
             _context.SaveChanges();
         }
-    
+
+        // Get all patients assigned to a specific doctor
         public List<Patient> GetDoctorPatients(Doctor doctor)
         {
             return _dbSet.Include(p => p.PrimaryDoctor).Where(p => p.PrimaryDoctor.Id == doctor.Id).ToList();

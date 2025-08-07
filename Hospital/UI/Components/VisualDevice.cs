@@ -11,6 +11,7 @@ namespace Hospital.UI.Components
     public static class VisualDevice
     {
 
+        // Clear numLines previous lines in the console
         public static void ClearPreviousLines(int numLines)
         {
             int cursorLine = Console.CursorTop;

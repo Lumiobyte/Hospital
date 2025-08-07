@@ -13,8 +13,8 @@ namespace Hospital.Repositories
 
         public AdminRepository(HospitalDbContext context) : base(context) { }
 
-        // Add extra methods
-
+        
+        // Helper allowing us to reach the HospitalDbContext and execute raw SQL statements on it.
         public void ExecuteSqlRawHelper(string sqlStatement)
         {
             _context.Database.ExecuteSqlRaw(sqlStatement);

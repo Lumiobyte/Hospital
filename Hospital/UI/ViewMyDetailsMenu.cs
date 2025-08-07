@@ -1,4 +1,5 @@
-﻿using Hospital.Models;
+﻿using Hospital.Extensions;
+using Hospital.Models;
 using Hospital.Repositories;
 using Hospital.UI.Components;
 using System;
@@ -27,14 +28,7 @@ namespace Hospital.UI
 
         public void Show()
         {
-            Console.WriteLine($"{user.Name}'s Details");
-            Console.WriteLine();
-            Console.WriteLine($"{user.GetType().Name} ID: {user.Id}");
-            Console.WriteLine($"Full Name: {user.FullName}");
-            Console.WriteLine($"Address: {user.Address}");
-            Console.WriteLine($"Email: {user.Email}");
-            Console.WriteLine($"Phone: {user.PhoneNumber}");
-
+            user.PrintUserDetails();
             InputDevice.DelayExitUntilPress();
         }
 

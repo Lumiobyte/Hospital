@@ -11,21 +11,7 @@ namespace Hospital.UI.Components
     public static class DataTable
     {
 
-        // Reflection + EF = infinite loops on navigation properties :(
-        private static bool IsSafeProperty(PropertyInfo propertyInfo)
-        {
-            var propType = propertyInfo.PropertyType;
-            if (propType.IsPrimitive || propType == typeof(string) || propType.IsValueType)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        // Render a tabular representation of the data contained in a list of objects
+        // Render a tabular representation of the data contained in a list of objects. Automatically generates required spacing and padding
         public static void RenderTable<T>(IEnumerable<T> entities, bool showId = false)
         {
 
@@ -36,8 +22,8 @@ namespace Hospital.UI.Components
             }
 
             var properties = showId 
-                ? typeof(T).GetProperties().Where(p => IsSafeProperty(p) && Attribute.IsDefined(p, typeof(TabulateAttribute))).ToList()
-                : typeof(T).GetProperties().Where(p => IsSafeProperty(p) && Attribute.IsDefined(p, typeof(TabulateAttribute)) && p.Name.ToLower() != "id").ToList();
+                ? typeof(T).GetProperties().Where(p => Attribute.IsDefined(p, typeof(TabulateAttribute))).ToList()
+                : typeof(T).GetProperties().Where(p => Attribute.IsDefined(p, typeof(TabulateAttribute)) && p.Name.ToLower() != "id").ToList();
 
             var headers = properties.Select(h => SpaceHeaders(h.Name)).ToList();
 

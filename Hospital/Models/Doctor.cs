@@ -30,6 +30,5 @@ namespace Hospital.Models
         [Tabulate]
         public string Address { get; set; }
 
-        //public ICollection<Patient> Patients { get; set; } = new List<Patient>();
     }
 }
