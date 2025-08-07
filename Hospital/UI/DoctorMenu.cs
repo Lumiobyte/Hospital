@@ -46,8 +46,7 @@ namespace Hospital.UI
                     _menuFactory.CreateMenu<ListAllPatientsMenu>(_user);
                     break;
                 case 3:
-                    // TODO: IMPLEMENT
-                    //_menuFactory.CreateMenu<ListAppointmentsForDoctorMenu>(_user);
+                    _menuFactory.CreateMenu<ListAppointmentsForDoctorMenu>(_user);
                     break;
                 case 4:
                     _menuFactory.CreateMenu<ViewPatientDetailMenu>();

@@ -18,5 +18,10 @@ namespace Hospital.Repositories
             return _dbSet.Include(a => a.AptPatient).Include(a => a.AptDoctor).Where(a => a.AptPatient.Id == patient.Id);
         }
 
+        public IEnumerable<Appointment> GetAppointmentsForDoctor(Doctor doctor)
+        {
+            return _dbSet.Include(a => a.AptPatient).Include(a => a.AptDoctor).Where(a => a.AptDoctor.Id == doctor.Id);
+        }
+
     }
 }

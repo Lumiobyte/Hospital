@@ -1,5 +1,6 @@
 ﻿using Hospital.Models;
 using Hospital.Repositories;
+using Hospital.Services;
 using Hospital.UI.Components;
 using System;
 using System.Collections.Generic;
@@ -12,29 +13,33 @@ namespace Hospital.UI
     public class AddNewUserMenu : IMenu
     {
 
-        DoctorRepository _doctorRepository;
-        PatientRepository _patientRepository;
+        HospitalService _hospitalService;
+        IUserAccount _newAccount;
 
-        IUserAccount newUserType;
-
-        public AddNewUserMenu(DoctorRepository doctorRepository, PatientRepository patientRepository, IUserAccount newUserType)
+        public AddNewUserMenu(HospitalService hospitalService, IUserAccount emptyAccount)
         {
-            _doctorRepository = doctorRepository;
-            _patientRepository = patientRepository;
-            this.newUserType = newUserType;
+            _hospitalService = hospitalService;
+            _newAccount = emptyAccount;
         }
 
         public void Load()
         {
             Console.Clear();
-            TitleBox.Draw($"Add {newUserType.GetType().Name}");
+            TitleBox.Draw($"Add {_newAccount.GetType().Name}");
         }
 
         public void Show()
         {
-            Console.WriteLine($"Registering a new {newUserType.GetType().Name} with the DotNet Hospital Management System");
+            var firstName = InputField.Prompt("First Name", Validators.NotNullString);
+            var lastName = InputField.Prompt("Last Name", Validators.NotNullString);
+            var email = InputField.Prompt("Email", Validators.EmailAddress);
+            var phone = InputField.Prompt("Phone", Validators.PhoneNumber);
+            var address = InputField.Prompt("Address", Validators.NotNullString);
 
-            // Take info for all fields - can use reflection to get all fields that exist. Exclude ID. Save to DB.
+            _hospitalService.AddUserAccount(_newAccount);
+
+            Console.WriteLine($"{_newAccount.GetType().Name} {_newAccount.FullName} added successfully!");
+            InputDevice.DelayUntilPress(() => { MenuState.Instance.Pop(); });
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Hospital.Services
 
         public IUser? ValidateCredentials(int userId, string password)
         {
-            if(userId == 867)
+            if (userId == 867)
             {
                 SeedDatabase();
                 Console.WriteLine("Database Seeded Succesfully :)");
@@ -35,7 +35,7 @@ namespace Hospital.Services
 
             if (foundUser == null || !foundUser.Password.Equals(password))
                 return null;
-            else 
+            else
                 return foundUser;
         }
 
@@ -65,6 +65,18 @@ namespace Hospital.Services
             INSERT OR REPLACE INTO sqlite_sequence (name, seq) VALUES ('Doctors', 999);
             INSERT OR REPLACE INTO sqlite_sequence (name, seq) VALUES ('Patients', 1999);
             ");
+        }
+
+        public void AddUserAccount(IUserAccount newAccount)
+        {
+            if (newAccount.GetType() == typeof(Doctor))
+            {
+                _doctorRepository.Add((Doctor)newAccount);
+            }
+            else if (newAccount.GetType() == typeof(Patient))
+            {
+                _patientRepository.Add((Patient)newAccount);
+            }
         }
     }
 }

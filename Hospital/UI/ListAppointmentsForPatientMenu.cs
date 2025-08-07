@@ -24,7 +24,7 @@ namespace Hospital.UI
         public void Load()
         {
             Console.Clear();
-            TitleBox.Draw("View Appointments");
+            TitleBox.Draw("View Appointments With Patient");
         }
 
         public void Show()

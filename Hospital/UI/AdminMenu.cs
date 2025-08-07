@@ -53,11 +53,10 @@ namespace Hospital.UI
                     _menuFactory.CreateMenu<ViewPatientDetailMenu>();
                     break;
                 case 5:
-                    _menuFactory.CreateMenu<AddDoctorMenu>();
+                    _menuFactory.CreateMenu<AddNewUserMenu>(new Doctor());
                     break;
                 case 6:
-                    _menuFactory.CreateMenu<AddPatientMenu>();
-                    
+                    _menuFactory.CreateMenu<AddNewUserMenu>(new Patient());
                     break;
                 case 7:
                     MenuState.Instance.Pop();

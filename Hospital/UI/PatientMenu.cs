@@ -43,7 +43,7 @@ namespace Hospital.UI
                     MenuState.Instance.Push(new ViewMyDetailsMenu(_user));
                     break;
                 case 2:
-                    // TODO: Implement "list my doctor details"
+                    _menuFactory.CreateMenu<ViewMyDoctorDetailsMenu>(_user);
                     break;
                 case 3:
                     _menuFactory.CreateMenu<ListAppointmentsForPatientMenu>(_user);
