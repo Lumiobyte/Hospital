@@ -27,7 +27,10 @@ namespace Hospital.Models
         [Tabulate]
         public string Address { get; set; }
 
-        public Doctor PrimaryDoctor { get; set; }
+
+        public int? PrimaryDoctorId { get; set; }
+        [ForeignKey(nameof(PrimaryDoctorId))]
+        public Doctor? PrimaryDoctor { get; set; }
 
 
 

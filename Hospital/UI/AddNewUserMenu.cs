@@ -30,11 +30,12 @@ namespace Hospital.UI
 
         public void Show()
         {
-            var firstName = InputField.Prompt("First Name", Validators.NotNullString);
-            var lastName = InputField.Prompt("Last Name", Validators.NotNullString);
-            var email = InputField.Prompt("Email", Validators.EmailAddress);
-            var phone = InputField.Prompt("Phone", Validators.PhoneNumber);
-            var address = InputField.Prompt("Address", Validators.NotNullString);
+            _newAccount.Name = InputField.Prompt("First Name", Validators.NotNullString);
+            _newAccount.Surname = InputField.Prompt("Last Name", Validators.NotNullString);
+            _newAccount.Email = InputField.Prompt("Email", Validators.EmailAddress);
+            _newAccount.PhoneNumber = InputField.Prompt("Phone", Validators.PhoneNumber);
+            _newAccount.Address = InputField.Prompt("Address", Validators.NotNullString);
+            _newAccount.Password = InputField.Prompt("Password", Validators.NotNullString);
 
             _hospitalService.AddUserAccount(_newAccount);
 

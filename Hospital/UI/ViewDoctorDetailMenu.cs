@@ -22,25 +22,27 @@ namespace Hospital.UI
         public void Load()
         {
             Console.Clear();
-            TitleBox.Draw("View Patient Details");
+            TitleBox.Draw("View Doctor Details");
         }
 
         public void Show()
         {
-            var doctorId = int.Parse(InputField.Prompt("Patient ID to view", Validators.Numeric));
+            var doctorId = int.Parse(InputField.Prompt("Doctor ID to view", Validators.Numeric));
 
             var doctor = _repository.GetById(doctorId);
 
-            if (doctor == null)
+            while (doctor == null)
             {
+                VisualDevice.ClearPreviousLines(1);
                 Console.WriteLine($"Error: No doctor exists with ID {doctorId}");
-                InputDevice.DelayUntilPress(() => { MenuState.Instance.Pop(); });
-                return;
+
+                doctorId = int.Parse(InputField.Prompt("Doctor ID to view", Validators.Numeric));
+                doctor = _repository.GetById(doctorId);
             }
 
             DataTable.RenderTable(new List<Doctor> { doctor });
 
-            InputDevice.DelayUntilPress(() => { MenuState.Instance.Pop(); });
+            InputDevice.DelayExitUntilPress();
         }
 
     }

@@ -28,6 +28,13 @@ namespace Hospital.UI.Components
         // Render a tabular representation of the data contained in a list of objects
         public static void RenderTable<T>(IEnumerable<T> entities, bool showId = false)
         {
+
+            if(entities == null || !entities.Any())
+            {
+                Console.WriteLine("There are no records to show!");
+                return;
+            }
+
             var properties = showId 
                 ? typeof(T).GetProperties().Where(p => IsSafeProperty(p) && Attribute.IsDefined(p, typeof(TabulateAttribute))).ToList()
                 : typeof(T).GetProperties().Where(p => IsSafeProperty(p) && Attribute.IsDefined(p, typeof(TabulateAttribute)) && p.Name.ToLower() != "id").ToList();

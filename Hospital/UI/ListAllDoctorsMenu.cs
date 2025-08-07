@@ -26,7 +26,7 @@ namespace Hospital.UI
 
         public void Show()
         {
-            DataTable.RenderTable(_repository.GetAll());
+            DataTable.RenderTable(_repository.GetAll(), true);
 
             InputDevice.DelayUntilPress(() => { MenuState.Instance.Pop(); });
         }

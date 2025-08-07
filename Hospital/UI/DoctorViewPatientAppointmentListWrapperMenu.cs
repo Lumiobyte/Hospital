@@ -42,11 +42,14 @@ namespace Hospital.UI
 
             var patient = _repository.GetById(patientId);
 
-            if (patient == null)
+            while (patient == null)
             {
+                VisualDevice.ClearPreviousLines(1);
                 Console.WriteLine($"Error: No patient exists with ID {patientId}");
-                InputDevice.DelayUntilPress(() => { MenuState.Instance.Pop(); });
-                return;
+                
+
+                patientId = int.Parse(InputField.Prompt("Patient ID to view", Validators.Numeric));
+                patient = _repository.GetById(patientId);
             }
 
             _menuFactory.CreateMenu<ListAppointmentsForPatientMenu>(patient);

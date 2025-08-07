@@ -75,7 +75,9 @@ namespace Hospital.Services
             }
             else if (newAccount.GetType() == typeof(Patient))
             {
-                _patientRepository.Add((Patient)newAccount);
+                var patient = (Patient)newAccount;
+                patient.PrimaryDoctor = null;
+                _patientRepository.Add(patient);
             }
         }
     }

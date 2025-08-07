@@ -4,6 +4,8 @@ using Hospital.UI.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -62,9 +64,12 @@ namespace Hospital.UI
 
             var description = InputField.Prompt("Appointment description");
 
-            _appointmentRepository.Add(new Appointment() { AptDoctor = patient.PrimaryDoctor, AptPatient = patient, Description = description });
+            _appointmentRepository.Add(new Appointment() { AptDoctor = patientDoctor, AptPatient = patient, Description = description });
 
-            Console.WriteLine("Booked your appointment succesfully!");
+            Emails.SendEmail(patientDoctor.Email, "New Appointment Booking", $"Dear {patientDoctor.FullName},\n{patient.FullName} has scheduled a new appointment with you.\n\nAppointment Description:{description}");
+            Emails.SendEmail(patient.Email, $"Doctor's Appointment with ${patientDoctor.FullName}", $"Dear {patient.FullName},\nYou have succesfully scheduled an appointment with Dr {patientDoctor.FullName}.\n\nAppointment Description:{description}");
+
+            Console.WriteLine("Booked your appointment succesfully! You and your doctor have been notified by email.");
             InputDevice.DelayExitUntilPress();
         }
 

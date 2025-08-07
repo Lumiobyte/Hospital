@@ -31,11 +31,11 @@ namespace Hospital.UI
         {
             if (_doctor == null)
             {
-                DataTable.RenderTable(_repository.GetAll());
+                DataTable.RenderTable(_repository.GetAll(), true);
             }
             else
             {
-                DataTable.RenderTable(_repository.GetDoctorPatients(_doctor));
+                DataTable.RenderTable(_repository.GetDoctorPatients(_doctor), true);
             }
 
             InputDevice.DelayUntilPress(() => { MenuState.Instance.Pop(); });
