@@ -30,7 +30,7 @@ namespace Hospital.UI
         }
 
         // Create a new instance of a generic menu that requires database access e.g. the "create new user" menu, the "schedule new appointment" menu..
-        public void CreateMenu<T>() where T : IMenu // could allow this to take some args in some structure e.g. a list or a dict, whihc are then passed to the menu obect initialisation.
+        public void CreateMenu<T>() where T : IMenu
         {
             MenuState.Instance.Push(ActivatorUtilities.CreateInstance<T>(_serviceProvider));
         }
